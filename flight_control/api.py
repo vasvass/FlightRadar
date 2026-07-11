@@ -24,6 +24,7 @@ class Flight:
     altitude_m: Optional[float]
     velocity_ms: Optional[float]
     heading_deg: Optional[float]
+    vertical_rate_ms: Optional[float]
     on_ground: bool
 
     @classmethod
@@ -38,6 +39,7 @@ class Flight:
             on_ground=state[8],
             velocity_ms=state[9],
             heading_deg=state[10],
+            vertical_rate_ms=state[11],
         )
 
 
@@ -64,3 +66,11 @@ def filter_by_country(flights: list, country: str) -> list:
     """Keep only flights whose origin country contains `country` (case-insensitive)."""
     needle = country.lower()
     return [f for f in flights if needle in f.origin_country.lower()]
+
+
+def fetch_flight(icao24: str) -> Optional[Flight]:
+    """Fetch the current state of a single aircraft by its icao24 address."""
+    response = requests.get(STATES_URL, params={"icao24": icao24}, timeout=10)
+    response.raise_for_status()
+    states = response.json().get("states") or []
+    return Flight.from_state_vector(states[0]) if states else None

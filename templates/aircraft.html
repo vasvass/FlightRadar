@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Control Center — Aircraft</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1><a class="back-link" href="/">&larr;</a> Aircraft {{ icao24 }}</h1>
+    <span id="status">loading…</span>
+  </header>
+
+  <div id="error" class="error hidden"></div>
+
+  <div class="detail-grid">
+    <section class="panel blueprint-panel">
+      <img id="blueprint" alt="Aircraft blueprint">
+      <dl class="profile-info" id="profile-info"></dl>
+      <p class="note">
+        Illustrative profile — OpenSky's live feed doesn't report the real
+        aircraft model, so this is assigned from a small bundled catalog.
+      </p>
+    </section>
+
+    <section class="panel cockpit-panel">
+      <div class="gauges-grid" id="gauges"></div>
+      <p class="note">
+        Airspeed, altitude, heading and vertical speed are real telemetry.
+        Attitude pitch is approximated from climb angle; bank isn't
+        available in the free feed, so the horizon never rolls.
+      </p>
+    </section>
+  </div>
+
+  <script src="{{ url_for('static', filename='cockpit.js') }}" data-icao24="{{ icao24 }}"></script>
+</body>
+</html>

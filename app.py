@@ -8,7 +8,8 @@ from dataclasses import asdict
 
 from flask import Flask, jsonify, render_template, request
 
-from flight_control.api import fetch_flights, filter_by_country
+from flight_control.aircraft_catalog import profile_for
+from flight_control.api import fetch_flight, fetch_flights, filter_by_country
 
 app = Flask(__name__)
 
@@ -42,6 +43,23 @@ def api_flights():
     airborne.sort(key=lambda f: f.altitude_m or 0, reverse=True)
 
     return jsonify([asdict(f) for f in airborne[:25]])
+
+
+@app.route("/aircraft/<icao24>")
+def aircraft_detail(icao24):
+    return render_template("aircraft.html", icao24=icao24)
+
+
+@app.route("/api/aircraft/<icao24>")
+def api_aircraft(icao24):
+    flight = fetch_flight(icao24)
+    if flight is None:
+        return jsonify({"error": "aircraft not currently tracked"}), 404
+
+    return jsonify({
+        "flight": asdict(flight),
+        "profile": asdict(profile_for(icao24)),
+    })
 
 
 if __name__ == "__main__":

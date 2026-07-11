@@ -27,6 +27,11 @@ function renderFlights(flights) {
   tbody.innerHTML = "";
   for (const f of flights) {
     const row = document.createElement("tr");
+    row.classList.add("flight-row");
+    row.addEventListener("click", () => {
+      window.location.href = `/aircraft/${f.icao24}`;
+    });
+
     const altitude = f.altitude_m ? Math.round(f.altitude_m * M_TO_FT).toLocaleString() : "-";
     const speed = f.velocity_ms ? Math.round(f.velocity_ms * MS_TO_KTS) : "-";
     const heading = f.heading_deg != null ? `${Math.round(f.heading_deg)}°` : "-";
