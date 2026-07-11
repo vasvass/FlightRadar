@@ -50,6 +50,11 @@ assigned deterministically from a small bundled catalog — illustrative,
 not the real airframe. The gauge values themselves (speed, altitude,
 heading, vertical rate) are genuine live data.
 
+The blueprint art itself is real top-down aircraft silhouettes (one per
+catalog model, not just a generic per-category shape), sourced from the
+[tar1090](https://github.com/wiedehopf/tar1090) project's ADS-B map icons.
+Those files are GPLv2-or-later; see `static/blueprints/NOTICE.md` for details.
+
 ## Test
 
 ```bash
@@ -69,8 +74,8 @@ python -m pytest
 - `app.py` — Flask web UI; serves pages plus `/api/flights` and
   `/api/aircraft/<icao24>` JSON endpoints
 - `templates/`, `static/` — the web UI's HTML/CSS/JS, including the SVG
-  aircraft blueprints (`static/blueprints/`) and cockpit gauge logic
-  (`static/cockpit.js`)
+  aircraft blueprints (`static/blueprints/`, see its `NOTICE.md` for
+  licensing) and cockpit gauge logic (`static/cockpit.js`)
 - `tests/` — unit tests
 
 ## Roadmap
