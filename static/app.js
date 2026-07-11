@@ -8,6 +8,13 @@ const statusEl = document.getElementById("status");
 
 async function loadFlights() {
   const params = new URLSearchParams();
+
+  const pageParams = new URLSearchParams(window.location.search);
+  const bbox = pageParams.get("bbox");
+  if (bbox) {
+    params.set("bbox", bbox);
+  }
+
   if (countryInput.value.trim()) {
     params.set("country", countryInput.value.trim());
   }
