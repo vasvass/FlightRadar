@@ -53,8 +53,7 @@ heading, vertical rate) are genuine live data.
 The blueprint art itself is real top-down aircraft silhouettes (one per
 catalog model, not just a generic per-category shape), sourced from the
 [tar1090](https://github.com/wiedehopf/tar1090) project's ADS-B map icons.
-Those files carry tar1090's GPLv2-or-later license, which is narrower than
-the rest of this repo — see `static/blueprints/NOTICE.md` for details.
+Those files are GPLv2-or-later; see `static/blueprints/NOTICE.md` for details.
 
 ## Test
 
