@@ -36,15 +36,20 @@ function renderFlights(flights) {
     const speed = f.velocity_ms ? Math.round(f.velocity_ms * MS_TO_KTS) : "-";
     const heading = f.heading_deg != null ? `${Math.round(f.heading_deg)}°` : "-";
 
-    row.innerHTML = `
-      <td>${f.callsign || f.icao24}</td>
-      <td>${f.origin_country}</td>
-      <td>${altitude}</td>
-      <td>${speed}</td>
-      <td>${heading}</td>
-    `;
+    const cells = [
+      f.callsign || f.icao24,
+      f.origin_country,
+      altitude,
+      speed,
+      heading,
+    ];
+
+    for (const value of cells) {
+      const td = document.createElement("td");
+      td.textContent = String(value);
+      row.appendChild(td);
+    }
     tbody.appendChild(row);
-  }
 }
 
 countryInput.addEventListener("change", loadFlights);
