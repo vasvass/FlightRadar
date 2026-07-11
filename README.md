@@ -36,7 +36,7 @@ python main.py --country "United States"
 python app.py
 ```
 
-Then open http://127.0.0.1:5000. The page polls `/api/flights` every 15s and
+Then open http://127.0.0.1:5001. The page polls `/api/flights` every 15s and
 supports the same country filter as the CLI, typed into the box in the
 header. Bounding box can be overridden via a `?bbox=lamin,lomin,lamax,lomax`
 query parameter.
