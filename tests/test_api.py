@@ -1,4 +1,4 @@
-from flight_control.api import Flight
+from flight_control.api import Flight, filter_by_country
 
 SAMPLE_STATE = [
     "a1b2c3",       # icao24
@@ -22,3 +22,14 @@ def test_from_state_vector_parses_fields():
     assert flight.origin_country == "United States"
     assert flight.altitude_m == 10668.0
     assert flight.on_ground is False
+
+
+def test_filter_by_country_matches_case_insensitively():
+    us_flight = Flight.from_state_vector(SAMPLE_STATE)
+    uk_state = list(SAMPLE_STATE)
+    uk_state[2] = "United Kingdom"
+    uk_flight = Flight.from_state_vector(uk_state)
+
+    result = filter_by_country([us_flight, uk_flight], "united states")
+
+    assert result == [us_flight]

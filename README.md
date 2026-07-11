@@ -24,6 +24,12 @@ By default it tracks the Los Angeles basin. Pass your own bounding box:
 python main.py --bbox 40.4 -74.3 41.0 -73.6   # New York area
 ```
 
+Filter by origin country:
+
+```bash
+python main.py --country "United States"
+```
+
 ## Test
 
 ```bash
@@ -42,7 +48,6 @@ python -m pytest
 
 ## Ideas for extending this as you learn
 
-- Add a `--country` filter to only show flights from a given origin country
 - Persist snapshots to SQLite and chart altitude/speed history for one flight
 - Add alerting (e.g. flash a row when a plane descends below a threshold)
 - Swap the polling loop for `asyncio` + `aiohttp`

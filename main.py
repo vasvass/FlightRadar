@@ -10,7 +10,7 @@ import time
 from rich.console import Console
 from rich.live import Live
 
-from flight_control.api import fetch_flights
+from flight_control.api import fetch_flights, filter_by_country
 from flight_control.dashboard import build_table
 
 # Los Angeles basin: (lamin, lomin, lamax, lomax)
@@ -34,6 +34,12 @@ def parse_args() -> argparse.Namespace:
         default=REFRESH_SECONDS,
         help="Seconds between refreshes (default: 15)",
     )
+    parser.add_argument(
+        "--country",
+        type=str,
+        default=None,
+        help="Only show flights whose origin country contains this text",
+    )
     return parser.parse_args()
 
 
@@ -45,6 +51,8 @@ def main() -> None:
         while True:
             try:
                 flights = fetch_flights(bbox=tuple(args.bbox))
+                if args.country:
+                    flights = filter_by_country(flights, args.country)
                 live.update(build_table(flights))
             except Exception as exc:  # keep the dashboard running past transient API hiccups
                 console.print(f"[red]Error fetching flights: {exc}[/red]")
