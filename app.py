@@ -21,18 +21,25 @@ def _bbox_from_request() -> tuple:
     raw = request.args.get("bbox")
     if not raw:
         return DEFAULT_BBOX
-    lamin, lomin, lamax, lomax = (float(v) for v in raw.split(","))
+
+    try:
+        parts = [float(v) for v in raw.split(",")]
+    except ValueError as exc:
+        raise ValueError("bbox must be 4 comma-separated numbers: lamin,lomin,lamax,lomax") from exc
+
+    if len(parts) != 4:
+        raise ValueError("bbox must be 4 comma-separated numbers: lamin,lomin,lamax,lomax")
+
+    lamin, lomin, lamax, lomax = parts
     return (lamin, lomin, lamax, lomax)
-
-
-@app.route("/")
-def index():
-    return render_template("index.html")
 
 
 @app.route("/api/flights")
 def api_flights():
-    bbox = _bbox_from_request()
+    try:
+        bbox = _bbox_from_request()
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
     country = request.args.get("country")
 
     flights = fetch_flights(bbox=bbox)
