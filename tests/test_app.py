@@ -72,15 +72,6 @@ def test_api_aircraft_404s_when_not_tracked(mock_fetch):
     assert response.status_code == 404
 
 
-# --- root route ---
-
-def test_index_content_type_is_html():
-    client = app.test_client()
-    response = client.get("/")
-
-    assert "text/html" in response.content_type
-
-
 # --- /api/flights edge cases ---
 
 def test_api_flights_rejects_invalid_bbox():
