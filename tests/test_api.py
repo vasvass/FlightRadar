@@ -1,4 +1,6 @@
-from flight_control.api import Flight, filter_by_country
+from unittest.mock import Mock, patch
+
+from flight_control.api import Flight, fetch_flight, filter_by_country
 
 SAMPLE_STATE = [
     "a1b2c3",       # icao24
@@ -11,6 +13,7 @@ SAMPLE_STATE = [
     False,            # on_ground
     230.5,            # velocity_ms
     270.0,            # heading_deg
+    -2.5,             # vertical_rate_ms
 ]
 
 
@@ -33,3 +36,19 @@ def test_filter_by_country_matches_case_insensitively():
     result = filter_by_country([us_flight, uk_flight], "united states")
 
     assert result == [us_flight]
+
+
+@patch("flight_control.api.requests.get")
+def test_fetch_flight_returns_none_when_not_found(mock_get):
+    mock_get.return_value = Mock(json=lambda: {"states": None})
+
+    assert fetch_flight("ffffff") is None
+
+
+@patch("flight_control.api.requests.get")
+def test_fetch_flight_parses_single_state(mock_get):
+    mock_get.return_value = Mock(json=lambda: {"states": [SAMPLE_STATE]})
+
+    flight = fetch_flight("a1b2c3")
+
+    assert flight.icao24 == "a1b2c3"
