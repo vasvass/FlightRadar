@@ -32,8 +32,8 @@ function renderFlights(flights) {
       window.location.href = `/aircraft/${f.icao24}`;
     });
 
-    const altitude = f.altitude_m ? Math.round(f.altitude_m * M_TO_FT).toLocaleString() : "-";
-    const speed = f.velocity_ms ? Math.round(f.velocity_ms * MS_TO_KTS) : "-";
+    const altitude = f.altitude_m != null ? Math.round(f.altitude_m * M_TO_FT).toLocaleString() : "-";
+    const speed = f.velocity_ms != null ? Math.round(f.velocity_ms * MS_TO_KTS) : "-";
     const heading = f.heading_deg != null ? `${Math.round(f.heading_deg)}°` : "-";
 
     const cells = [
