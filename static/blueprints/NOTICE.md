@@ -9,9 +9,9 @@ tar1090 itself credits the A320/B737-family shapes to contributor `pimlie`.
 
 tar1090 is licensed under the **GNU General Public License v2.0 or later**;
 a copy is included in this directory as `LICENSE`. Under GPL's copyleft
-terms, these derived SVG files are therefore also GPLv2-or-later — this is
-narrower than the rest of this repository, which carries no such
-requirement elsewhere.
+terms, these derived SVG files are therefore also GPLv2-or-later. If you
+redistribute this project, ensure this GPL-licensed artwork is compatible
+with your intended distribution and licensing.
 
 Fill colors and enclosing `<svg>`/viewBox wrapper were adapted here to fit
 this project's dark theme; the path geometry (the actual aircraft shapes)
