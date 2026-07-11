@@ -58,3 +58,9 @@ def fetch_flights(bbox: Optional[tuple] = None) -> list:
 
     states = data.get("states") or []
     return [Flight.from_state_vector(s) for s in states]
+
+
+def filter_by_country(flights: list, country: str) -> list:
+    """Keep only flights whose origin country contains `country` (case-insensitive)."""
+    needle = country.lower()
+    return [f for f in flights if needle in f.origin_country.lower()]
