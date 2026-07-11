@@ -136,7 +136,7 @@ function renderProfile(profile) {
     <dt>Wingspan</dt><dd>${profile.wingspan_m} m</dd>
     <dt>Length</dt><dd>${profile.length_m} m</dd>
   `;
-  blueprintEl.src = `/static/blueprints/${profile.category}.svg`;
+  blueprintEl.src = `/static/blueprints/${profile.blueprint}.svg`;
   blueprintEl.alt = `${profile.manufacturer} ${profile.model} blueprint`;
 }
 

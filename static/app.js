@@ -57,6 +57,7 @@ function renderFlights(flights) {
       row.appendChild(td);
     }
     tbody.appendChild(row);
+  }
 }
 
 countryInput.addEventListener("change", loadFlights);

@@ -7,6 +7,10 @@ flight is assigned a profile from this catalog deterministically by its
 icao24 (same tail always gets the same profile), purely to drive the
 blueprint and cockpit visualizations. It is illustrative, not a claim
 about the real aircraft.
+
+The `blueprint` field names an SVG in static/blueprints/, derived from
+tar1090 (GPLv2+) — see static/blueprints/NOTICE.md for attribution and
+license details.
 """
 
 from dataclasses import dataclass
@@ -17,7 +21,7 @@ import hashlib
 class AircraftProfile:
     manufacturer: str
     model: str
-    category: str  # matches an SVG file in static/blueprints/
+    blueprint: str  # matches an SVG file in static/blueprints/ (no extension)
     engines: int
     engine_type: str
     wingspan_m: float
@@ -26,13 +30,13 @@ class AircraftProfile:
 
 
 CATALOG = [
-    AircraftProfile("Boeing", "737-800", "narrow-body", 2, "turbofan", 35.8, 39.5, 35000),
-    AircraftProfile("Airbus", "A320neo", "narrow-body", 2, "turbofan", 35.8, 37.6, 37000),
-    AircraftProfile("Boeing", "777-300ER", "wide-body", 2, "turbofan", 64.8, 73.9, 40000),
-    AircraftProfile("Airbus", "A350-900", "wide-body", 2, "turbofan", 64.8, 66.8, 41000),
-    AircraftProfile("Embraer", "E175", "regional-jet", 2, "turbofan", 26.0, 31.9, 32000),
-    AircraftProfile("Bombardier", "CRJ900", "regional-jet", 2, "turbofan", 24.9, 36.4, 33000),
-    AircraftProfile("ATR", "72-600", "turboprop", 2, "turboprop", 27.0, 27.2, 24000),
+    AircraftProfile("Boeing", "737-800", "b738", 2, "turbofan", 35.8, 39.5, 35000),
+    AircraftProfile("Airbus", "A320neo", "a320", 2, "turbofan", 35.8, 37.6, 37000),
+    AircraftProfile("Boeing", "777-300ER", "heavy_2e", 2, "turbofan", 64.8, 73.9, 40000),
+    AircraftProfile("Airbus", "A350-900", "a359", 2, "turbofan", 64.8, 66.8, 41000),
+    AircraftProfile("Embraer", "E175", "airliner", 2, "turbofan", 26.0, 31.9, 32000),
+    AircraftProfile("Bombardier", "CRJ900", "jet_swept", 2, "turbofan", 24.9, 36.4, 33000),
+    AircraftProfile("ATR", "72-600", "twin_small", 2, "turboprop", 27.0, 27.2, 24000),
 ]
 
 
