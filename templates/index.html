@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Control Center</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Flight Control Center</h1>
+    <div class="filters">
+      <input type="text" id="country" placeholder="Filter by country (e.g. France)">
+      <span id="status">loading…</span>
+    </div>
+  </header>
+
+  <table id="flights">
+    <thead>
+      <tr>
+        <th>Callsign</th>
+        <th>Country</th>
+        <th>Altitude (ft)</th>
+        <th>Speed (kts)</th>
+        <th>Heading</th>
+      </tr>
+    </thead>
+    <tbody id="flights-body"></tbody>
+  </table>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
